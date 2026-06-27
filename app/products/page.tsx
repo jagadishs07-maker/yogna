@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import gsap from 'gsap';
@@ -16,7 +16,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   'feminine-hygiene':  '#1c1c1c',
 };
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') ?? 'all';
 
@@ -183,5 +183,17 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="pg-page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '50vh' }}>
+        <p>Loading products...</p>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }
