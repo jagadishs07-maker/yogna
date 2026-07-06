@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import gsap from 'gsap';
 import { PRODUCTS, CATEGORIES } from '@/data/products';
@@ -142,14 +143,35 @@ function ProductsContent() {
                 className="pg-card"
                 aria-label={product.name}
               >
-                {/* Placeholder area */}
+                {/* Product image or placeholder */}
                 <div
                   className="pg-card-thumb"
-                  style={{ background: CATEGORY_COLORS[product.categoryId] ?? '#000' }}
+                  style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
                 >
-                  <span className="pg-card-thumb-letter">
-                    {product.name.charAt(0)}
-                  </span>
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      style={{ objectFit: 'contain', padding: '12px' }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: CATEGORY_COLORS[product.categoryId] ?? '#000',
+                      }}
+                    >
+                      <span className="pg-card-thumb-letter">
+                        {product.name.charAt(0)}
+                      </span>
+                    </div>
+                  )}
                   <span className="pg-card-category-badge">{product.category}</span>
                 </div>
 

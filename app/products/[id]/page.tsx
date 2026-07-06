@@ -1,6 +1,7 @@
 'use client';
 import { use } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getProductById, PRODUCTS, CATEGORIES } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { notFound } from 'next/navigation';
@@ -45,14 +46,36 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
       {/* Main Detail */}
       <div className="pd-inner">
-        {/* Left — Product visual placeholder */}
+        {/* Left — Product visual */}
         <div className="pd-visual-wrap">
           <div
             className="pd-visual"
-            style={{ background: CATEGORY_COLORS[product.categoryId] ?? '#000' }}
+            style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
           >
-            <span className="pd-visual-letter">{product.name.charAt(0)}</span>
-            <span className="pd-visual-category">{categoryLabel}</span>
+            {product.image ? (
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: 'contain', padding: '24px' }}
+                priority
+              />
+            ) : (
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: CATEGORY_COLORS[product.categoryId] ?? '#000',
+                }}
+              >
+                <span className="pd-visual-letter">{product.name.charAt(0)}</span>
+                <span className="pd-visual-category">{categoryLabel}</span>
+              </div>
+            )}
           </div>
           <div className="pd-visual-tag">
             <span className="pd-visual-tag-dot" />
@@ -105,9 +128,30 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <Link key={rel.id} href={`/products/${rel.id}`} className="pg-card">
                 <div
                   className="pg-card-thumb"
-                  style={{ background: CATEGORY_COLORS[rel.categoryId] ?? '#000' }}
+                  style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
                 >
-                  <span className="pg-card-thumb-letter">{rel.name.charAt(0)}</span>
+                  {rel.image ? (
+                    <Image
+                      src={rel.image}
+                      alt={rel.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      style={{ objectFit: 'contain', padding: '12px' }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: CATEGORY_COLORS[rel.categoryId] ?? '#000',
+                      }}
+                    >
+                      <span className="pg-card-thumb-letter">{rel.name.charAt(0)}</span>
+                    </div>
+                  )}
                   <span className="pg-card-category-badge">{rel.category}</span>
                 </div>
                 <div className="pg-card-body">
