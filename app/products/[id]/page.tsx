@@ -16,16 +16,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   'feminine-hygiene':  '#1c1c1c',
 };
 
-const HYGIENE_CATEGORIES = new Set([
-  'aerosol-dispenser',
-  'aroma-diffusers',
-  'urinal-hygiene',
-  'soap-dispenser',
-  'paper-dispenser',
-  'hand-dryer',
-  'feminine-hygiene',
-]);
-
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const product = getProductById(id);
@@ -38,7 +28,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     .slice(0, 3);
 
   const categoryLabel = CATEGORIES.find(c => c.id === product.categoryId)?.name ?? product.category;
-  const isHygiene = HYGIENE_CATEGORIES.has(product.categoryId);
 
   const handleAdd = () => {
     addToCart({ id: product.id, name: product.name, category: product.category });
@@ -61,11 +50,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         <div className="pd-visual-wrap">
           <div
             className="pd-visual"
-            style={{
-              position: 'relative',
-              background: isHygiene ? '#1ea83c' : '#ffffff',
-              overflow: 'hidden',
-            }}
+            style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
           >
             {product.image ? (
               <Image
@@ -73,7 +58,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 alt={product.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                style={{ objectFit: 'cover', padding: 0 }}
+                style={{ objectFit: 'contain', padding: '24px' }}
                 priority
               />
             ) : (
@@ -139,26 +124,20 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         <div className="pd-related">
           <p className="section-label">More in {categoryLabel}</p>
           <div className="pd-related-grid">
-            {related.map(rel => {
-              const relIsHygiene = HYGIENE_CATEGORIES.has(rel.categoryId);
-              return (
-                <Link key={rel.id} href={`/products/${rel.id}`} className="pg-card">
-                  <div
-                    className="pg-card-thumb"
-                    style={{
-                      position: 'relative',
-                      background: relIsHygiene ? '#1ea83c' : '#ffffff',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {rel.image ? (
-                      <Image
-                        src={rel.image}
-                        alt={rel.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                        style={{ objectFit: 'cover', padding: 0 }}
-                      />
+            {related.map(rel => (
+              <Link key={rel.id} href={`/products/${rel.id}`} className="pg-card">
+                <div
+                  className="pg-card-thumb"
+                  style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
+                >
+                  {rel.image ? (
+                    <Image
+                      src={rel.image}
+                      alt={rel.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      style={{ objectFit: 'contain', padding: '12px' }}
+                    />
                   ) : (
                     <div
                       style={{
@@ -184,8 +163,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   </div>
                 </div>
               </Link>
-            );
-          })}
+            ))}
           </div>
         </div>
       )}

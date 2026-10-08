@@ -17,16 +17,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   'feminine-hygiene':  '#1c1c1c',
 };
 
-const HYGIENE_CATEGORIES = new Set([
-  'aerosol-dispenser',
-  'aroma-diffusers',
-  'urinal-hygiene',
-  'soap-dispenser',
-  'paper-dispenser',
-  'hand-dryer',
-  'feminine-hygiene',
-]);
-
 function ProductsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') ?? 'all';
@@ -146,50 +136,44 @@ function ProductsContent() {
 
           {/* Grid */}
           <div ref={gridRef} className="pg-grid">
-            {filtered.map(product => {
-              const isHygiene = HYGIENE_CATEGORIES.has(product.categoryId);
-              return (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.id}`}
-                  className="pg-card"
-                  aria-label={product.name}
+            {filtered.map(product => (
+              <Link
+                key={product.id}
+                href={`/products/${product.id}`}
+                className="pg-card"
+                aria-label={product.name}
+              >
+                {/* Product image or placeholder */}
+                <div
+                  className="pg-card-thumb"
+                  style={{ position: 'relative', background: '#f5f5f7', overflow: 'hidden' }}
                 >
-                  {/* Product image or placeholder */}
-                  <div
-                    className="pg-card-thumb"
-                    style={{
-                      position: 'relative',
-                      background: isHygiene ? '#1ea83c' : '#ffffff',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {product.image ? (
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                        style={{ objectFit: 'cover', padding: 0 }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          background: CATEGORY_COLORS[product.categoryId] ?? '#000',
-                        }}
-                      >
-                        <span className="pg-card-thumb-letter">
-                          {product.name.charAt(0)}
-                        </span>
-                      </div>
-                    )}
-                    <span className="pg-card-category-badge">{product.category}</span>
-                  </div>
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      style={{ objectFit: 'contain', padding: '12px' }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: CATEGORY_COLORS[product.categoryId] ?? '#000',
+                      }}
+                    >
+                      <span className="pg-card-thumb-letter">
+                        {product.name.charAt(0)}
+                      </span>
+                    </div>
+                  )}
+                  <span className="pg-card-category-badge">{product.category}</span>
+                </div>
 
                 {/* Info */}
                 <div className="pg-card-body">
@@ -210,8 +194,7 @@ function ProductsContent() {
                   </div>
                 </div>
               </Link>
-            );
-          })}
+            ))}
           </div>
 
           {filtered.length === 0 && (
