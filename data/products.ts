@@ -56,7 +56,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'disp-mini-3000',
-    image: '/products/disp-mini-3000.png',
     name: 'DISP MINI 3000',
     category: 'Aerosol Dispenser',
     categoryId: 'aerosol-dispenser',
@@ -65,7 +64,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'fresche-refill-100ml',
-    image: '/products/aroma-diffuser-oil.png',
     name: 'FRESCHE REFILLS 100 ML',
     category: 'Aerosol Dispenser',
     categoryId: 'aerosol-dispenser',
@@ -74,7 +72,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'fresche-refill-250ml',
-    image: '/products/aroma-diffuser-oil.png',
     name: 'FRESCHE REFILLS 250 ML',
     category: 'Aerosol Dispenser',
     categoryId: 'aerosol-dispenser',
@@ -123,7 +120,6 @@ export const PRODUCTS: Product[] = [
   // ── Urinal Hygiene System ────────────────────────────────────
   {
     id: 'disp-autojanitor-bottle',
-    image: '/products/disp-autojanitor-bottle.png',
     name: 'DISP AUTOJANITOR BOTTLE FILLED',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -132,7 +128,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'urinal-sensor-tap-sensor',
-    image: '/products/urinal-sensor-tap-sensor.png',
     name: 'Urinal Sensor and Tap Sensor',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -141,7 +136,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'autojanitor-refill-600ml',
-    image: '/products/disp-autojanitor-bottle.png',
     name: 'AUTOJANITOR REFILL 600 ML',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -150,7 +144,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'hygiesurf-autojanitor-refill-620ml',
-    image: '/products/disp-autojanitor-bottle.png',
     name: 'HYGIESURF AUTOJANITOR REFILL 620 ML',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -159,7 +152,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'hygiesurf-autosanitiser-refill-310ml',
-    image: '/products/disp-autojanitor-bottle.png',
     name: 'HYGIESURF AUTOSANITISER REFILL 310 ML',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -168,7 +160,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'act-en-5ltr',
-    image: '/products/disp-autojanitor-bottle.png',
     name: 'ACT-EN 5 LTR GALLON',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -177,7 +168,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'urinal-screen-k',
-    image: '/products/jet-hand-dryer.png',
     name: 'URINAL SCREEN – K',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -186,7 +176,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'eco-clip',
-    image: '/products/jet-hand-dryer.png',
     name: 'ECO CLIP',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -195,7 +184,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'bio-tab-screen',
-    image: '/products/jet-hand-dryer.png',
     name: 'BIO TAB SCREEN',
     category: 'Urinal Hygiene System',
     categoryId: 'urinal-hygiene',
@@ -242,7 +230,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'foam-soap-5ltr',
-    image: '/products/foam-soap-5ltr.png',
     name: 'FOAM SOAP 5 LTR GALLON',
     category: 'Soap Dispenser',
     categoryId: 'soap-dispenser',
@@ -251,7 +238,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'lotion-soap-5ltr',
-    image: '/products/foam-soap-5ltr.png',
     name: 'LOTION SOAP 5 LTR GALLON',
     category: 'Soap Dispenser',
     categoryId: 'soap-dispenser',
@@ -260,7 +246,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'gel-hand-sanitiser-5ltr',
-    image: '/products/foam-soap-5ltr.png',
     name: 'GEL HAND SANITISER 5 LTR GALLON',
     category: 'Soap Dispenser',
     categoryId: 'soap-dispenser',
@@ -280,7 +265,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'paper-3fold-golden-white',
-    image: '/products/paper-3fold-golden-white.png',
     name: 'PAPER 3 FOLD GOLDEN WHITE',
     category: 'Paper Dispenser',
     categoryId: 'paper-dispenser',
@@ -298,7 +282,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'dispenser-hrt-sensorcut',
-    image: '/products/dispenser-hrt-sensorcut.png',
     name: 'DISPENSER HRT SENSORCUT',
     category: 'Paper Dispenser',
     categoryId: 'paper-dispenser',
@@ -318,7 +301,6 @@ export const PRODUCTS: Product[] = [
   // ── Hand Dryer ───────────────────────────────────────────────
   {
     id: 'jet-hand-dryer',
-    image: '/products/jet-hand-dryer.png',
     name: 'JET HAND DRYER',
     category: 'Hand Dryer',
     categoryId: 'hand-dryer',
@@ -327,7 +309,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'heavy-duty-hand-dryer',
-    image: '/products/jet-hand-dryer.png',
     name: 'HEAVY DUTY HAND DRYER',
     category: 'Hand Dryer',
     categoryId: 'hand-dryer',
@@ -338,7 +319,6 @@ export const PRODUCTS: Product[] = [
   // ── Feminine Hygiene ─────────────────────────────────────────
   {
     id: 'feminine-bin-18ltr',
-    image: '/products/sanifemme-bin-sanitiser.png',
     name: 'FEMININE BIN 18 LTR',
     category: 'Feminine Hygiene',
     categoryId: 'feminine-hygiene',
@@ -356,7 +336,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'sanipod-manual-12ltr',
-    image: '/products/sanifemme-bin-sanitiser.png',
+    image: '/products/sanipod-manual-12ltr.png',
     name: 'SANIPOD MANUAL 12 LTR',
     category: 'Feminine Hygiene',
     categoryId: 'feminine-hygiene',
@@ -374,7 +354,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'intimus-saniflamme',
-    image: '/products/aroma-diffuser-710.png',
     name: 'INTIMUS SANIFLAMME',
     category: 'Feminine Hygiene',
     categoryId: 'feminine-hygiene',
@@ -383,7 +362,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'manual-sanitary-vending',
-    image: '/products/aroma-diffuser-720.png',
     name: 'MANUAL SANITARY VENDING MACHINE',
     category: 'Feminine Hygiene',
     categoryId: 'feminine-hygiene',
@@ -392,7 +370,6 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'automatic-sanitary-vending',
-    image: '/products/disp-multi-3000.png',
     name: 'AUTOMATIC SANITARY VENDING MACHINE',
     category: 'Feminine Hygiene',
     categoryId: 'feminine-hygiene',
