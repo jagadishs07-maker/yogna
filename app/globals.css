@@ -1295,16 +1295,20 @@ body.cursor-hover-cta .cursor-text {
 }
 
 .cart-item-thumb {
-  width: 64px;
-  height: 64px;
-  background: var(--black);
+  position: relative;
+  width: 68px;
+  height: 68px;
+  background: #f4ede4;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   font-family: var(--font-display);
-  font-size: 28px;
-  color: rgba(255,255,255,0.15);
+  font-size: 26px;
+  color: var(--black);
 }
 
 .cart-item-info {

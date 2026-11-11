@@ -72,10 +72,15 @@ function ProductsContent() {
     );
   }, [activeCategory, search]);
 
-  const handleAddToCart = (e: React.MouseEvent, product: { id: string; name: string; category: string }) => {
+  const handleAddToCart = (e: React.MouseEvent, product: (typeof PRODUCTS)[0]) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product);
+    addToCart({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      image: product.image,
+    });
   };
 
   return (

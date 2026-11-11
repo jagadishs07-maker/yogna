@@ -30,7 +30,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const categoryLabel = CATEGORIES.find(c => c.id === product.categoryId)?.name ?? product.category;
 
   const handleAdd = () => {
-    addToCart({ id: product.id, name: product.name, category: product.category });
+    addToCart({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      image: product.image,
+    });
   };
 
   return (

@@ -1,13 +1,15 @@
 'use client';
-import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { PRODUCTS } from '@/data/products';
 
 export interface CartProduct {
   id: string;
   name: string;
   category: string;
+  image?: string;
 }
 
-interface CartItem extends CartProduct {
+export interface CartItem extends CartProduct {
   quantity: number;
 }
 
@@ -25,6 +27,8 @@ interface CartContextType {
   toast: { visible: boolean; message: string };
 }
 
+const STORAGE_KEY = 'yogna_enquiry_cart_v1';
+
 const CartContext = createContext<CartContextType>({
   items: [],
   count: 0,
@@ -40,9 +44,46 @@ const CartContext = createContext<CartContextType>({
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toast, setToast] = useState({ visible: false, message: '' });
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Load from localStorage on client mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          // Enrich items with image/category if missing from older sessions
+          const enriched: CartItem[] = parsed.map(item => {
+            const prod = PRODUCTS.find(p => p.id === item.id);
+            return {
+              ...item,
+              image: item.image || prod?.image || '',
+              category: item.category || prod?.category || '',
+            };
+          });
+          setItems(enriched);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load cart from localStorage:', err);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // Save to localStorage when items change (only after initial load)
+  useEffect(() => {
+    if (!isLoaded) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch (err) {
+      console.error('Failed to save cart to localStorage:', err);
+    }
+  }, [items, isLoaded]);
 
   const showToast = useCallback((message: string) => {
     // clear any existing timer
@@ -54,10 +95,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const addToCart = useCallback((product: CartProduct) => {
+    const resolvedImage = product.image || PRODUCTS.find(p => p.id === product.id)?.image || '';
     setItems(prev => {
       const existing = prev.find(i => i.id === product.id);
-      if (existing) return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i);
-      return [...prev, { ...product, quantity: 1 }];
+      if (existing) {
+        return prev.map(i =>
+          i.id === product.id
+            ? { ...i, quantity: i.quantity + 1, image: i.image || resolvedImage }
+            : i
+        );
+      }
+      return [...prev, { ...product, image: resolvedImage, quantity: 1 }];
     });
     showToast(`Added "${product.name}" to enquiry`);
   }, [showToast]);

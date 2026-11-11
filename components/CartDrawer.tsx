@@ -1,5 +1,7 @@
 'use client';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { PRODUCTS } from '@/data/products';
 
 // ── Replace with real YOGNA WhatsApp number ──────────────────
 const YOGNA_WHATSAPP = '919176088989'; // e.g. 919876543210
@@ -47,43 +49,56 @@ export default function CartDrawer() {
             </div>
           ) : (
             <ul className="cart-items-list">
-              {items.map(item => (
-                <li key={item.id} className="cart-item">
-                  {/* Placeholder image */}
-                  <div className="cart-item-thumb">
-                    <span>{item.name.charAt(0)}</span>
-                  </div>
-
-                  <div className="cart-item-info">
-                    <p className="cart-item-name">{item.name}</p>
-                    <p className="cart-item-category">{item.category}</p>
-
-                    <div className="cart-item-controls">
-                      <div className="qty-controls">
-                        <button
-                          className="qty-btn"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          aria-label="Decrease quantity"
-                        >−</button>
-                        <span className="qty-value">{item.quantity}</span>
-                        <button
-                          className="qty-btn"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          aria-label="Increase quantity"
-                        >+</button>
-                      </div>
-
-                      <button
-                        className="cart-remove-btn"
-                        onClick={() => removeFromCart(item.id)}
-                        aria-label={`Remove ${item.name}`}
-                      >
-                        🗑 Remove
-                      </button>
+              {items.map(item => {
+                const itemImage = item.image || PRODUCTS.find(p => p.id === item.id)?.image;
+                return (
+                  <li key={item.id} className="cart-item">
+                    {/* Product thumbnail */}
+                    <div className="cart-item-thumb">
+                      {itemImage ? (
+                        <Image
+                          src={itemImage}
+                          alt={item.name}
+                          fill
+                          sizes="64px"
+                          style={{ objectFit: 'contain', padding: '6px' }}
+                        />
+                      ) : (
+                        <span>{item.name.charAt(0)}</span>
+                      )}
                     </div>
-                  </div>
-                </li>
-              ))}
+
+                    <div className="cart-item-info">
+                      <p className="cart-item-name">{item.name}</p>
+                      <p className="cart-item-category">{item.category}</p>
+
+                      <div className="cart-item-controls">
+                        <div className="qty-controls">
+                          <button
+                            className="qty-btn"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            aria-label="Decrease quantity"
+                          >−</button>
+                          <span className="qty-value">{item.quantity}</span>
+                          <button
+                            className="qty-btn"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            aria-label="Increase quantity"
+                          >+</button>
+                        </div>
+
+                        <button
+                          className="cart-remove-btn"
+                          onClick={() => removeFromCart(item.id)}
+                          aria-label={`Remove ${item.name}`}
+                        >
+                          🗑 Remove
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

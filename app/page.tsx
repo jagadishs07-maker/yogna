@@ -14,7 +14,6 @@ import StatsSection from '@/components/StatsSection';
 import AdditionalProducts from '@/components/AdditionalProducts';
 import Partners from '@/components/Partners';
 import Footer from '@/components/Footer';
-import { useCart } from '@/context/CartContext';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +21,6 @@ if (typeof window !== 'undefined') {
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
-  const { addToCart } = useCart();
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -40,15 +38,6 @@ export default function Home() {
 
   const handleLoaderComplete = useCallback(() => setLoaded(true), []);
 
-  // addToCart now auto-shows toast via CartContext
-  const handleAddToCart = useCallback((product: { id?: string; name: string; category?: string }) => {
-    addToCart({
-      id: product.id ?? product.name.toLowerCase().replace(/\s+/g, '-'),
-      name: product.name,
-      category: product.category ?? '',
-    });
-  }, [addToCart]);
-
   return (
     <>
       <Loader onComplete={handleLoaderComplete} />
@@ -56,11 +45,11 @@ export default function Home() {
         <main>
           <Hero />
           <TrustBar />
-          <ProductGrid onAddToCart={handleAddToCart} />
+          <ProductGrid />
           <FeatureSection />
           <ServiceCategories />
           <StatsSection />
-          <AdditionalProducts onAddToCart={handleAddToCart} />
+          <AdditionalProducts />
           <Partners />
         </main>
         <Footer />
