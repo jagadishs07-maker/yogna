@@ -53,15 +53,17 @@ const TRUST_ITEMS = [
 export default function TrustBar() {
   return (
     <div className="trust-bar">
-      {TRUST_ITEMS.map((item, i) => (
-        <div key={i} className="trust-item">
-          <div className="trust-icon">{item.icon}</div>
-          <div>
-            <div className="trust-label">{item.label}</div>
-            <div className="trust-sub">{item.sub}</div>
+      <div className="trust-bar-inner">
+        {TRUST_ITEMS.map((item, i) => (
+          <div key={i} className="trust-item">
+            <div className="trust-icon">{item.icon}</div>
+            <div>
+              <div className="trust-label">{item.label}</div>
+              <div className="trust-sub">{item.sub}</div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

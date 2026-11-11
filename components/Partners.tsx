@@ -53,23 +53,25 @@ export default function Partners() {
 
   return (
     <section ref={sectionRef} className="partners-section" id="partners">
-      <div className="partners-header">
-        <p className="section-label">Authorized Partners</p>
-        <h2 className="partners-title">Our Partners</h2>
-        <p className="partners-desc">
-          We supply certified hygiene solutions to India&apos;s leading corporations, 
-          healthcare groups, and commercial real estate portfolios.
-        </p>
-      </div>
+      <div className="partners-inner">
+        <div className="partners-header">
+          <p className="section-label">Authorized Partners</p>
+          <h2 className="partners-title">Our Partners</h2>
+          <p className="partners-desc">
+            We supply certified hygiene solutions to India&apos;s leading corporations, 
+            healthcare groups, and commercial real estate portfolios.
+          </p>
+        </div>
 
-      <div className="partners-grid">
-        {PARTNERS.map((partner, i) => (
-          <div key={i} className="partner-card">
-            <div className="partner-logo-area">{partner.abbr}</div>
-            <h3 className="partner-name">{partner.name}</h3>
-            <p className="partner-desc">{partner.desc}</p>
-          </div>
-        ))}
+        <div className="partners-grid">
+          {PARTNERS.map((partner, i) => (
+            <div key={i} className="partner-card">
+              <div className="partner-logo-area">{partner.abbr}</div>
+              <h3 className="partner-name">{partner.name}</h3>
+              <p className="partner-desc">{partner.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

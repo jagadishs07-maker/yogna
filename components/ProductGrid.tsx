@@ -81,19 +81,21 @@ export default function ProductGrid({ onAddToCart }: ProductGridProps) {
 
   return (
     <section ref={sectionRef} className="product-section" id="products">
-      <div className="product-section-header">
-        <p className="section-label">Our Products</p>
-        <Link href="/products" className="view-all-link">View All Products</Link>
-      </div>
-      <div className="product-grid">
-        {PRODUCTS.map((product, i) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            index={i}
-            onAddToCart={onAddToCart}
-          />
-        ))}
+      <div className="product-section-inner">
+        <div className="product-section-header">
+          <p className="section-label">Our Products</p>
+          <Link href="/products" className="view-all-link">View All Products</Link>
+        </div>
+        <div className="product-grid">
+          {PRODUCTS.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={i}
+              onAddToCart={onAddToCart}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

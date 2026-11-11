@@ -95,24 +95,26 @@ export default function AdditionalProducts({ onAddToCart }: AdditionalProductsPr
 
   return (
     <section ref={sectionRef} className="additional-section">
-      <div className="additional-header">
-        <h2 className="additional-title">
-          MORE<br />FROM<br />YOGNA
-        </h2>
-        <Link href="/products" className="view-all-link">
-          View All Products
-        </Link>
-      </div>
+      <div className="additional-inner">
+        <div className="additional-header">
+          <h2 className="additional-title">
+            MORE<br />FROM<br />YOGNA
+          </h2>
+          <Link href="/products" className="view-all-link">
+            View All Products
+          </Link>
+        </div>
 
-      <div className="additional-grid">
-        {ADDITIONAL_PRODUCTS.map((product, i) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            index={i}
-            onAddToCart={onAddToCart}
-          />
-        ))}
+        <div className="additional-grid">
+          {ADDITIONAL_PRODUCTS.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={i}
+              onAddToCart={onAddToCart}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

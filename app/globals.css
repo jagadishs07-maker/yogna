@@ -164,6 +164,9 @@ body.cursor-hover-cta .cursor-text {
   padding: 28px 48px;
   mix-blend-mode: normal;
   background: var(--bg);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .navbar-logo {
@@ -258,7 +261,7 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Hero ───────────────────────────────────────────────────── */
 .hero {
-  min-height: 100vh;
+  min-height: min(100vh, 900px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -292,6 +295,8 @@ body.cursor-hover-cta .cursor-text {
   align-items: flex-end;
   justify-content: space-between;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .hero-tagline {
@@ -339,6 +344,13 @@ body.cursor-hover-cta .cursor-text {
 .trust-bar {
   background: var(--black);
   padding: 20px 48px;
+  width: 100%;
+}
+
+.trust-bar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
@@ -416,20 +428,29 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Product Grid ───────────────────────────────────────────── */
 .product-section {
-  padding: 100px 48px;
+  padding: 80px 48px;
+  width: 100%;
+}
+
+.product-section-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .product-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0;
+  margin-bottom: 32px;
+  width: 100%;
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  width: 100%;
 }
 
 /* ─── Product Card ───────────────────────────────────────────── */
@@ -438,15 +459,18 @@ body.cursor-hover-cta .cursor-text {
   background: var(--bg);
   overflow: hidden;
   cursor: none;
+  width: 100%;
 }
 
 .product-card-image-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 380px;
   overflow: hidden;
   clip-path: inset(100% 0 0 0);
   background: #e7dfd6;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .product-card-image-wrap img {
@@ -529,13 +553,14 @@ body.cursor-hover-cta .cursor-text {
 /* ─── Feature Section ────────────────────────────────────────── */
 .feature-section {
   background: var(--red);
-  min-height: 100vh;
+  min-height: min(100vh, 760px);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   padding: 80px 48px;
+  width: 100%;
 }
 
 .feature-inner {
@@ -545,11 +570,14 @@ body.cursor-hover-cta .cursor-text {
   gap: 80px;
   max-width: 1400px;
   width: 100%;
+  margin: 0 auto;
 }
 
 .feature-image-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4 / 3.2;
+  max-height: 440px;
+  width: 100%;
   overflow: hidden;
   clip-path: inset(0 0 100% 0);
   background: #151515;
@@ -642,15 +670,23 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Stats Section ──────────────────────────────────────────── */
 .stats-section {
-  padding: 80px 48px;
+  padding: 60px 48px;
   border-top: 2px solid var(--red);
   border-bottom: 2px solid var(--red);
+  width: 100%;
+}
+
+.stats-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
+  width: 100%;
 }
 
 .stat-item {
@@ -768,6 +804,13 @@ body.cursor-hover-cta .cursor-text {
   background: var(--black);
   color: var(--white);
   padding: 80px 48px 48px;
+  width: 100%;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .footer-top {
@@ -850,15 +893,23 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Additional Products Section ────────────────────────────── */
 .additional-section {
-  padding: 100px 48px;
+  padding: 80px 48px;
   border-top: 2px solid var(--red);
+  width: 100%;
+}
+
+.additional-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .additional-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
 .additional-title {
@@ -899,7 +950,8 @@ body.cursor-hover-cta .cursor-text {
 .additional-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 24px;
+  width: 100%;
 }
 
 /* ─── Parallax wrapper ───────────────────────────────────────── */
@@ -915,15 +967,23 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Service Categories ─────────────────────────────────────── */
 .categories-section {
-  padding: 100px 48px;
+  padding: 80px 48px;
   background: var(--white);
+  width: 100%;
+}
+
+.categories-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  margin-top: 60px;
+  margin-top: 40px;
+  width: 100%;
 }
 
 .category-card {
@@ -1006,12 +1066,19 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Partners Section ───────────────────────────────────────── */
 .partners-section {
-  padding: 100px 48px;
+  padding: 80px 48px;
   background: var(--bg);
+  width: 100%;
+}
+
+.partners-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .partners-header {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .partners-title {
@@ -1036,7 +1103,8 @@ body.cursor-hover-cta .cursor-text {
 .partners-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 24px;
+  width: 100%;
 }
 
 .partner-card {
@@ -2002,9 +2070,12 @@ body.cursor-hover-cta .cursor-text {
   }
 
   .trust-bar {
+    padding: 24px;
+  }
+
+  .trust-bar-inner {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 20px;
-    padding: 24px;
   }
 
   .trust-item {
@@ -2236,7 +2307,7 @@ body.cursor-hover-cta .cursor-text {
 
 /* Tiny Screens (Small Phones) */
 @media (max-width: 480px) {
-  .trust-bar {
+  .trust-bar-inner {
     grid-template-columns: 1fr;
   }
 

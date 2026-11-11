@@ -41,19 +41,21 @@ export default function StatsSection() {
 
   return (
     <section ref={sectionRef} className="stats-section">
-      <div className="stats-grid">
-        {STATS.map((stat, i) => (
-          <div
-            key={i}
-            className="stat-item"
-            ref={el => { numbersRef.current[i] = el; }}
-          >
-            <div className="stat-number">
-              {stat.number}<span>{stat.suffix}</span>
+      <div className="stats-inner">
+        <div className="stats-grid">
+          {STATS.map((stat, i) => (
+            <div
+              key={i}
+              className="stat-item"
+              ref={el => { numbersRef.current[i] = el; }}
+            >
+              <div className="stat-number">
+                {stat.number}<span>{stat.suffix}</span>
+              </div>
+              <p className="stat-label">{stat.label}</p>
             </div>
-            <p className="stat-label">{stat.label}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

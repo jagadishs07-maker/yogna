@@ -81,19 +81,21 @@ export default function ServiceCategories() {
 
   return (
     <section ref={sectionRef} className="categories-section" id="services">
-      <p className="section-label">Our Services</p>
-      <div className="categories-grid">
-        {CATEGORIES.map((cat, i) => (
-          <div key={i} className="category-card">
-            <span className="category-num">{cat.num}</span>
-            <span className="category-icon">{cat.icon}</span>
-            <h3 className="category-name">{cat.name}</h3>
-            <p className="category-desc">{cat.desc}</p>
-            <Link href={cat.link} className="category-link">
-              Explore
-            </Link>
-          </div>
-        ))}
+      <div className="categories-inner">
+        <p className="section-label">Our Services</p>
+        <div className="categories-grid">
+          {CATEGORIES.map((cat, i) => (
+            <div key={i} className="category-card">
+              <span className="category-num">{cat.num}</span>
+              <span className="category-icon">{cat.icon}</span>
+              <h3 className="category-name">{cat.name}</h3>
+              <p className="category-desc">{cat.desc}</p>
+              <Link href={cat.link} className="category-link">
+                Explore
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
