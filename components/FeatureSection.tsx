@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,7 +14,7 @@ export default function FeatureSection() {
   const imageRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
   const ctaWrapRef = useRef<HTMLDivElement>(null);
 
   // Magnetic CTA
@@ -92,11 +93,11 @@ export default function FeatureSection() {
         {/* Product image */}
         <div ref={imageRef} className="feature-image-wrap">
           <Image
-            src="/images/feature_product.png"
-            alt="YOGNA SmartHygiene Station — featured product"
+            src="/products/automatic-sanitary-vending.png"
+            alt="YOGNA Automatic Sanitary Vending Machine — Flagship System"
             fill
             sizes="50vw"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain', padding: '36px' }}
           />
         </div>
 
@@ -105,20 +106,26 @@ export default function FeatureSection() {
           <span className="feature-label">Flagship System</span>
 
           <h2 ref={headlineRef} className="feature-headline">
-            SMART<br />HYGIENE<br />STATION
+            AUTOMATIC<br />SANITARY<br />VENDING
           </h2>
 
           <p ref={bodyRef} className="feature-body" style={{ transform: 'translateY(40px)' }}>
-            Our most advanced all-in-one washroom solution. Combines touchless 
-            soap dispensing, bio-sanitizing, and real-time usage monitoring — 
-            all in a single eco-certified unit. One installation covers your 
-            entire commercial washroom floor.
+            A fully automated sanitary vending machine engineered with digital
+            payment (UPI, card, coin), touchless QR-code dispensing, and real-time
+            inventory telemetry. Delivers 24/7 dignified, hygienic access across
+            commercial facilities.
           </p>
 
           <div ref={ctaWrapRef} className="magnetic-wrap" style={{ alignSelf: 'flex-start' }}>
-            <button ref={ctaRef} className="feature-cta" id="feature-cta-btn">
+            <Link
+              ref={ctaRef}
+              href="/products/automatic-sanitary-vending"
+              className="feature-cta"
+              id="feature-cta-btn"
+              style={{ textDecoration: 'none' }}
+            >
               VIEW<br />MORE
-            </button>
+            </Link>
           </div>
         </div>
       </div>

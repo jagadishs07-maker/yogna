@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useCart } from '@/context/CartContext';
@@ -50,35 +51,43 @@ export default function ProductCard({ product, index = 0, onAddToCart }: Product
     };
   }, []);
 
-  const handleAdd = () => {
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     addToCart(product);
     if (onAddToCart) onAddToCart(product);
   };
 
   return (
     <div ref={cardRef} className="product-card" data-product>
-      {/* Image with clip-path mask (animated by ProductGrid) */}
-      <div className="product-card-image-wrap" data-image-wrap>
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          style={{ objectFit: 'cover' }}
-          priority={index < 3}
-        />
-      </div>
+      <Link
+        href={`/products/${product.id}`}
+        style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+        aria-label={`View ${product.name}`}
+      >
+        {/* Image with clip-path mask (animated by ProductGrid) */}
+        <div className="product-card-image-wrap" data-image-wrap>
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: 'contain', padding: '24px' }}
+            priority={index < 3}
+          />
+        </div>
 
-      {/* Info */}
-      <div className="product-card-body">
-        <div className="product-card-top">
-          <h3 className="product-name">{product.name}</h3>
+        {/* Info */}
+        <div className="product-card-body">
+          <div className="product-card-top">
+            <h3 className="product-name">{product.name}</h3>
+          </div>
+          <div className="product-category">
+            <span className="product-category-dot" />
+            {product.category}
+          </div>
         </div>
-        <div className="product-category">
-          <span className="product-category-dot" />
-          {product.category}
-        </div>
-      </div>
+      </Link>
 
       {/* Add to enquiry (slides in on hover) */}
       <button className="product-add-btn" onClick={handleAdd} aria-label={`Enquire about ${product.name}`}>

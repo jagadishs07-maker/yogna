@@ -11,22 +11,22 @@ if (typeof window !== 'undefined') {
 
 const PRODUCTS = [
   {
-    id: 'touchless-dispenser',
-    name: 'TouchFree Pro Dispenser',
-    category: 'Touchless Systems',
-    image: '/images/touchless_dispenser.png',
+    id: 'disp-auto-foam-lotion-spray-1000ml',
+    name: 'DISP AUTOMATIC 1000 ML',
+    category: 'Soap Dispenser',
+    image: '/products/disp-auto-foam-lotion-spray-1000ml.png',
   },
   {
-    id: 'bio-sanitizer',
-    name: 'BioClean Sanitizer',
-    category: 'Bio Solutions',
-    image: '/images/bio_sanitizer.png',
+    id: 'disp-autojanitor-bottle',
+    name: 'DISP AUTOJANITOR BOTTLE',
+    category: 'Urinal Hygiene System',
+    image: '/products/disp-autojanitor-bottle.png',
   },
   {
-    id: 'feminine-hygiene',
-    name: 'FemSafe Disposal Unit',
+    id: 'sanipod-manual-12ltr',
+    name: 'SANIPOD MANUAL 12 LTR',
     category: 'Feminine Hygiene',
-    image: '/images/feminine_hygiene.png',
+    image: '/products/sanipod-manual-12ltr.png',
   },
 ];
 

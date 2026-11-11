@@ -11,22 +11,22 @@ if (typeof window !== 'undefined') {
 
 const ADDITIONAL_PRODUCTS = [
   {
-    id: 'air-freshener',
-    name: 'AutoScent Air System',
-    category: 'Air Care',
-    image: '/images/air_freshener.png',
+    id: 'disp-3000',
+    name: 'DISP 3000',
+    category: 'Aerosol Dispenser',
+    image: '/products/disp-3000.png',
   },
   {
-    id: 'hand-dryer',
-    name: 'VeloStar Hand Dryer',
-    category: 'Hand Drying',
-    image: '/images/hand_dryer.png',
+    id: 'jet-hand-dryer',
+    name: 'JET HAND DRYER',
+    category: 'Hand Dryer',
+    image: '/products/jet-hand-dryer.png',
   },
   {
-    id: 'tissue-dispenser',
-    name: 'PaperMax Dispenser',
-    category: 'Tissue Systems',
-    image: '/images/tissue_dispenser.png',
+    id: 'dispenser-hrt-sensorcut',
+    name: 'DISPENSER HRT SENSORCUT',
+    category: 'Paper Dispenser',
+    image: '/products/dispenser-hrt-sensorcut.png',
   },
 ];
 
