@@ -22,8 +22,9 @@ export default function ProductCard({ product, index = 0, onAddToCart }: Product
   const cardRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
-  // Magnetic effect on hover
+  // Magnetic effect on hover (desktop only)
   useEffect(() => {
+    if (typeof window !== 'undefined' && (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024)) return;
     const card = cardRef.current;
     if (!card) return;
 

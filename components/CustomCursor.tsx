@@ -6,6 +6,9 @@ export default function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Disable on touch / coarse pointer devices for native mobile performance
+    if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024) return;
+
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
     let animId: number;

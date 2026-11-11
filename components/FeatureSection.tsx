@@ -17,8 +17,9 @@ export default function FeatureSection() {
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const ctaWrapRef = useRef<HTMLDivElement>(null);
 
-  // Magnetic CTA
+  // Magnetic CTA (desktop only)
   useEffect(() => {
+    if (typeof window !== 'undefined' && (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024)) return;
     const wrap = ctaWrapRef.current;
     const btn = ctaRef.current;
     if (!wrap || !btn) return;
