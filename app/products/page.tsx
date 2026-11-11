@@ -24,12 +24,38 @@ function ProductsContent() {
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
   const [search, setSearch] = useState('');
   const gridRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
   useEffect(() => {
     const cat = searchParams.get('category') ?? 'all';
     setActiveCategory(cat);
   }, [searchParams]);
+
+  // Enable horizontal mouse wheel scrolling on tabs
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  // Auto-scroll active tab into view
+  useEffect(() => {
+    if (!tabsRef.current) return;
+    const activeTab = tabsRef.current.querySelector<HTMLElement>('.pg-tab.active');
+    if (activeTab) {
+      activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [activeCategory]);
 
   const filtered = PRODUCTS.filter(p => {
     const matchCat  = activeCategory === 'all' || p.categoryId === activeCategory;
@@ -114,7 +140,7 @@ function ProductsContent() {
         {/* ── Main Content ──────────────────────────────────── */}
         <div className="pg-main">
           {/* Category tabs */}
-          <div className="pg-tabs" role="tablist">
+          <div ref={tabsRef} className="pg-tabs" role="tablist">
             <button
               role="tab"
               className={`pg-tab ${activeCategory === 'all' ? 'active' : ''}`}

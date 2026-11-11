@@ -1596,10 +1596,29 @@ body.cursor-hover-cta .cursor-text {
   overflow-x: auto;
   margin-bottom: 28px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--red) rgba(0, 0, 0, 0.06);
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
 }
 
-.pg-tabs::-webkit-scrollbar { display: none; }
+.pg-tabs::-webkit-scrollbar {
+  height: 5px;
+}
+
+.pg-tabs::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.pg-tabs::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 4px;
+}
+
+.pg-tabs::-webkit-scrollbar-thumb:hover {
+  background: #cc2936;
+}
 
 .pg-tab {
   background: transparent;
