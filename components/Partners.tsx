@@ -12,19 +12,16 @@ const PARTNERS = [
     abbr: 'JCP',
     name: 'Jade Consumer Products Pvt. Limited',
     desc: 'Strategic product partner supplying premium consumer hygiene and washroom care solutions across commercial establishments.',
-    link: 'View Partnership',
   },
   {
     abbr: 'EUR',
     name: 'Euronics Industries Pvt. Ltd.',
     desc: 'Technical and manufacturing partner for automated, eco-friendly washroom hygiene dispensing systems.',
-    link: 'View Partnership',
   },
   {
     abbr: 'RHS',
     name: 'Roots Hygiene Solutions',
     desc: 'Authorized distribution and service partner for industrial cleaning equipment and washroom hygiene infrastructure.',
-    link: 'View Partnership',
   },
 ];
 
@@ -71,7 +68,6 @@ export default function Partners() {
             <div className="partner-logo-area">{partner.abbr}</div>
             <h3 className="partner-name">{partner.name}</h3>
             <p className="partner-desc">{partner.desc}</p>
-            <a href="#contact" className="partner-link">{partner.link}</a>
           </div>
         ))}
       </div>
