@@ -151,32 +151,58 @@ body.cursor-hover-cta .cursor-text {
   opacity: 0;
 }
 
-/* ─── Navbar ─────────────────────────────────────────────────── */
+/* ─── Floating Glass Navbar ──────────────────────────────────── */
 .navbar {
-  position: static;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: fixed;
+  top: 18px;
+  left: 24px;
+  right: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 48px;
-  mix-blend-mode: normal;
-  background: var(--bg);
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
+  padding: 12px 32px;
+  background: rgba(246, 242, 237, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 9999px;
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.06),
+    0 4px 12px -2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.75);
+  transition: 
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar.scrolled {
+  background: rgba(246, 242, 237, 0.88);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 14px 36px -6px rgba(0, 0, 0, 0.12),
+    0 6px 16px -2px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
 }
 
 .navbar-logo {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 32px;
+  font-size: 28px;
   letter-spacing: 0.1em;
   color: var(--black);
   text-decoration: none;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-logo:hover {
+  opacity: 0.85;
 }
 
 .navbar-logo span {
@@ -186,7 +212,7 @@ body.cursor-hover-cta .cursor-text {
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 36px;
   list-style: none;
 }
 
@@ -199,9 +225,11 @@ body.cursor-hover-cta .cursor-text {
   color: var(--black);
   text-decoration: none;
   transition: color 0.2s;
+  padding: 4px 0;
 }
 
-.navbar-links a:hover {
+.navbar-links a:hover,
+.navbar-links a.nav-active {
   color: var(--red);
 }
 
@@ -265,7 +293,7 @@ body.cursor-hover-cta .cursor-text {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 48px 60px;
+  padding: 100px 48px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -1430,7 +1458,7 @@ body.cursor-hover-cta .cursor-text {
 
 .pg-header {
   background: var(--black);
-  padding: 60px 48px 50px;
+  padding: 110px 48px 50px;
 }
 
 .pg-header-inner {
@@ -1804,7 +1832,7 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Product Detail Page ────────────────────────────────────── */
 .pd-page {
-  padding-top: 0;
+  padding-top: 88px;
   min-height: 100vh;
   background: var(--bg);
 }
@@ -2081,15 +2109,18 @@ body.cursor-hover-cta .cursor-text {
 /* Medium Screens (Tablets / Laptops) */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 20px 24px;
+    top: 14px;
+    left: 18px;
+    right: 18px;
+    padding: 10px 24px;
   }
 
   .navbar-links {
-    gap: 24px;
+    gap: 22px;
   }
 
   .hero {
-    padding: 0 24px 40px;
+    padding: 90px 24px 40px;
   }
 
   .trust-bar {
@@ -2192,10 +2223,18 @@ body.cursor-hover-cta .cursor-text {
 /* Mobile Screens (Phones) */
 @media (max-width: 768px) {
   .navbar {
-    padding: 16px 24px;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 10px 18px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-radius: 9999px;
+  }
+
+  .navbar-logo {
+    font-size: 24px;
   }
 
   .navbar-links {
@@ -2204,6 +2243,18 @@ body.cursor-hover-cta .cursor-text {
 
   .mobile-nav-actions {
     display: flex !important;
+  }
+
+  .hero {
+    padding: 80px 20px 40px;
+  }
+
+  .pd-page {
+    padding-top: 76px;
+  }
+
+  .pd-breadcrumb {
+    padding: 16px 20px;
   }
 
   .hero-bottom {
@@ -2277,7 +2328,7 @@ body.cursor-hover-cta .cursor-text {
 
   /* Product Catalog (page.tsx) */
   .pg-header {
-    padding: 40px 24px;
+    padding: 92px 20px 36px;
   }
 
   .pg-header-row {
