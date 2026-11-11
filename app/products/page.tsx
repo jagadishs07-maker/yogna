@@ -26,6 +26,11 @@ function ProductsContent() {
   const gridRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
+  useEffect(() => {
+    const cat = searchParams.get('category') ?? 'all';
+    setActiveCategory(cat);
+  }, [searchParams]);
+
   const filtered = PRODUCTS.filter(p => {
     const matchCat  = activeCategory === 'all' || p.categoryId === activeCategory;
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());

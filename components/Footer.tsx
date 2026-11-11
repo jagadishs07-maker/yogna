@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="footer" id="contact">
@@ -23,10 +25,10 @@ export default function Footer() {
           <div className="footer-col">
             <p className="footer-col-title">Products</p>
             <ul>
-              <li><a href="#products">Touchless Dispensers</a></li>
-              <li><a href="#products">Bio-Sanitizers</a></li>
-              <li><a href="#products">Feminine Hygiene</a></li>
-              <li><a href="#products">Air Care Systems</a></li>
+              <li><Link href="/products?category=soap-dispenser">Touchless Dispensers</Link></li>
+              <li><Link href="/products?category=urinal-hygiene">Bio-Sanitizers</Link></li>
+              <li><Link href="/products?category=feminine-hygiene">Feminine Hygiene</Link></li>
+              <li><Link href="/products?category=aerosol-dispenser">Air Care Systems</Link></li>
             </ul>
           </div>
 
