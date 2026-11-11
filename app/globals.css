@@ -487,7 +487,7 @@ body.cursor-hover-cta .cursor-text {
 }
 
 .product-card-body {
-  padding: 18px 0 24px;
+  padding: 16px 0 8px;
 }
 
 .product-card-top {
@@ -526,7 +526,7 @@ body.cursor-hover-cta .cursor-text {
 
 .product-add-btn {
   position: absolute;
-  bottom: 24px;
+  bottom: 8px;
   right: 0;
   background: var(--black);
   color: var(--white);
@@ -893,7 +893,7 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Additional Products Section ────────────────────────────── */
 .additional-section {
-  padding: 80px 48px;
+  padding: 80px 48px 24px;
   border-top: 2px solid var(--red);
   width: 100%;
 }
@@ -1066,7 +1066,7 @@ body.cursor-hover-cta .cursor-text {
 
 /* ─── Partners Section ───────────────────────────────────────── */
 .partners-section {
-  padding: 80px 48px;
+  padding: 24px 48px 80px;
   background: var(--bg);
   width: 100%;
 }
@@ -2104,7 +2104,7 @@ body.cursor-hover-cta .cursor-text {
   }
 
   .additional-section {
-    padding: 60px 24px;
+    padding: 50px 24px 16px;
   }
 
   .additional-grid {
@@ -2126,7 +2126,7 @@ body.cursor-hover-cta .cursor-text {
   }
 
   .partners-section {
-    padding: 60px 24px;
+    padding: 16px 24px 50px;
   }
 
   .partners-grid {
