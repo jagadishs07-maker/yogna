@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
+import { useCart } from '@/context/CartContext';
 
 const CHARS = [
   { letter: 'Y', tag: '01 · PRECISION' },
@@ -11,9 +13,11 @@ const CHARS = [
 ];
 
 export default function Hero() {
+  const { count, openCart } = useCart();
   const heroStageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Only run on client
     if (typeof window === 'undefined') return;
 
     // Check for pointer fine (desktop)
@@ -22,8 +26,8 @@ export default function Hero() {
       document.body.classList.add('custom-cursor-on');
     }
 
-    // 1. Split .ln-roll-link text inside Hero into character spans
-    const rollLinks = document.querySelectorAll<HTMLElement>('#hero-stage .ln-roll-link');
+    // 1. Split .ln-roll-link text into Lando Norris slot-machine character spans
+    const rollLinks = document.querySelectorAll<HTMLElement>('.ln-roll-link');
     rollLinks.forEach((link) => {
       if (link.dataset.splitDone === 'true') return;
       const text = link.textContent?.trim() || '';
@@ -52,7 +56,38 @@ export default function Hero() {
       });
     });
 
-    // 2. Staggered Entrance Animation for YOGNA Letters
+    // 2. Sliding Magnetic Pill Behind Navbar Links
+    const navContainer = document.getElementById('nav-links-container');
+    const navPill = document.getElementById('nav-hover-pill');
+    const navItems = document.querySelectorAll<HTMLElement>('#nav-links-container .nav-item');
+
+    const handleNavItemEnter = (e: MouseEvent) => {
+      if (!navContainer || !navPill) return;
+      const cRect = navContainer.getBoundingClientRect();
+      const iRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      gsap.to(navPill, {
+        x: iRect.left - cRect.left,
+        width: iRect.width,
+        opacity: 1,
+        duration: 0.36,
+        ease: 'expo.out',
+      });
+    };
+
+    const handleNavLeave = () => {
+      if (navPill) {
+        gsap.to(navPill, { opacity: 0, duration: 0.25, ease: 'power2.out' });
+      }
+    };
+
+    if (navContainer && navPill) {
+      navItems.forEach((item) => {
+        item.addEventListener('mouseenter', handleNavItemEnter);
+      });
+      navContainer.addEventListener('mouseleave', handleNavLeave);
+    }
+
+    // 3. Staggered Entrance Animation for YOGNA Letters & Navbar
     const heroWord = document.getElementById('yogna-hero-word');
     const charSlots = document.querySelectorAll<HTMLElement>('.yogna-char-slot');
     const charInners = document.querySelectorAll<HTMLElement>('.yogna-char-inner');
@@ -66,8 +101,13 @@ export default function Hero() {
       { yPercent: 115, rotateX: -50 },
       { yPercent: 0, rotateX: 0, duration: 1.05, stagger: 0.06, ease: 'expo.out' }
     );
+    gsap.fromTo(
+      '#hero-nav',
+      { y: -30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }
+    );
 
-    // 3. Continuous Flow on 12 Thick Multi-Line Curvy Background Tracks
+    // 4. Continuous Flow on 12 Thick Multi-Line Curvy Background Tracks
     const contourFlowTween = gsap.to('.contour-path, .contour-path-red:not(#interactive-blob)', {
       strokeDashoffset: (i) => (i % 2 === 0 ? -1380 : 1380),
       duration: 15,
@@ -108,7 +148,7 @@ export default function Hero() {
       gsap.to(contourFlowTween, { timeScale: 1, duration: 0.7, overwrite: 'auto' });
     };
 
-    // 4. Per-Letter Hover 3D Extrusion + Expanding Crimson Shockwave
+    // 5. Per-Letter Hover 3D Extrusion + Expanding Crimson Shockwave
     const slotEnterCleanups: (() => void)[] = [];
     charSlots.forEach((slot, idx) => {
       const inner = slot.querySelector<HTMLElement>('.yogna-char-inner');
@@ -162,7 +202,7 @@ export default function Hero() {
       });
     });
 
-    // 5. Velocity Spring Cursor + 3D Mouse Tilt & Multi-Layer Parallax
+    // 6. Velocity Spring Cursor + 3D Mouse Tilt & Multi-Layer Parallax
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
     const cursorLabel = document.getElementById('cursor-label');
@@ -205,7 +245,7 @@ export default function Hero() {
 
     window.addEventListener('mousemove', onGlobalMouseMove);
 
-    // 6. Secondary Crimson Mask Revealed by Spotlight
+    // 7. Secondary Crimson Mask Revealed by Spotlight
     const onWordEnter = () => heroWord?.classList.add('spotlight-active');
     const onWordLeave = () => heroWord?.classList.remove('spotlight-active');
     const onWordMove = (e: MouseEvent) => {
@@ -237,7 +277,7 @@ export default function Hero() {
       heroWord.addEventListener('click', onWordClick);
     }
 
-    // 7. Magnetic Elements & Custom Cursor Hover Labels
+    // 8. Magnetic Elements & Custom Cursor Hover Labels
     const magneticElements = document.querySelectorAll<HTMLElement>('.magnetic-el');
     const magneticCleanups: (() => void)[] = [];
 
@@ -309,7 +349,7 @@ export default function Hero() {
 
     animFrameId = requestAnimationFrame(tickCursor);
 
-    // 8. Bottom-Left Metadata Text Scramble on Hover
+    // 9. Bottom-Left Metadata Text Scramble on Hover
     const scrambleEl = document.getElementById('scramble-text');
     const bottomLeftMeta = document.getElementById('bottom-left-meta');
     const originalMeta = 'CORPORATE HYGIENE SOLUTIONS · EST. 2015';
@@ -342,7 +382,7 @@ export default function Hero() {
       bottomLeftMeta.addEventListener('mouseenter', onMetaEnter);
     }
 
-    // 9. Scroll-Driven Depth Zoom & Smooth Scroll
+    // 10. Scroll-Driven Depth Zoom & Smooth Scroll
     const onScroll = () => {
       if (!heroWord) return;
       const progress = Math.min(Math.max(window.scrollY / (window.innerHeight * 0.65), 0), 1);
@@ -385,6 +425,9 @@ export default function Hero() {
       if (scrollBtn) scrollBtn.removeEventListener('click', onScrollClick);
       if (scrambleTimer) clearInterval(scrambleTimer);
 
+      if (navContainer) navContainer.removeEventListener('mouseleave', handleNavLeave);
+      navItems.forEach((item) => item.removeEventListener('mouseenter', handleNavItemEnter));
+
       slotEnterCleanups.forEach((cleanup) => cleanup());
       magneticCleanups.forEach((cleanup) => cleanup());
       cursorCleanups.forEach((cleanup) => cleanup());
@@ -417,7 +460,7 @@ export default function Hero() {
       <section
         ref={heroStageRef}
         id="hero-stage"
-        className="relative min-h-screen w-full overflow-hidden flex flex-col justify-between px-5 sm:px-10 md:px-14 pt-24 sm:pt-28 pb-6 sm:pb-8 grain-overlay select-none"
+        className="relative h-screen w-full overflow-hidden flex flex-col justify-between px-5 sm:px-10 md:px-14 py-5 sm:py-7 grain-overlay select-none"
       >
         {/* LAYER 1: 12 Thick Multi-Line Curvy Background Tracks */}
         <svg
@@ -511,8 +554,87 @@ export default function Hero() {
           </g>
         </svg>
 
-        {/* LAYER 2: Centerpiece Giant "YOGNA" Typography */}
-        <main className="relative z-10 my-auto flex flex-col items-center justify-center select-none py-4">
+        {/* LAYER 2: Floating Frosted Pill Navbar */}
+        <header className="relative z-20 w-full max-w-[1260px] mx-auto pt-1">
+          <nav
+            id="hero-nav"
+            className="hero-navbar rounded-full px-5 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between"
+          >
+            <a
+              href="#hero-stage"
+              id="brand-logo"
+              data-cursor="BRAND"
+              className="magnetic-el inline-flex items-center font-display-condensed text-2xl sm:text-[28px] tracking-normal select-none focus:outline-none"
+            >
+              <span className="logo-yog text-[#0A0A0A]">YOG</span>
+              <span className="logo-na text-[#D91E18]">NA</span>
+            </a>
+
+            <div className="flex items-center gap-4 sm:gap-8 md:gap-10">
+              <div
+                id="nav-links-container"
+                className="relative hidden md:flex items-center gap-3 lg:gap-5 text-[12px] font-medium tracking-[0.16em] text-[#0A0A0A]"
+              >
+                <span id="nav-hover-pill" aria-hidden="true" />
+                <Link
+                  href="/products"
+                  data-cursor="EXPLORE"
+                  className="nav-item ln-roll-link uppercase focus:outline-none"
+                >
+                  PRODUCTS
+                </Link>
+                <a
+                  href="#services"
+                  data-cursor="EXPLORE"
+                  className="nav-item ln-roll-link uppercase focus:outline-none"
+                >
+                  SERVICES
+                </a>
+                <a
+                  href="#partners"
+                  data-cursor="EXPLORE"
+                  className="nav-item ln-roll-link uppercase focus:outline-none"
+                >
+                  PARTNERS
+                </a>
+                <a
+                  href="#contact"
+                  data-cursor="CONNECT"
+                  className="nav-item ln-roll-link uppercase focus:outline-none"
+                >
+                  CONTACT
+                </a>
+              </div>
+
+              <button
+                type="button"
+                id="cart-btn"
+                data-cursor="CART"
+                aria-label="Cart"
+                onClick={openCart}
+                className="magnetic-el relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center shadow-md hover:bg-[#D91E18] transition-colors duration-300 focus:outline-none"
+              >
+                <svg
+                  className="w-4 h-4 sm:w-[18px] sm:h-[18px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="9" cy="21" r="1.5" />
+                  <circle cx="19" cy="21" r="1.5" />
+                  <path d="M2.5 3h2.8l2.4 11.4a2 2 0 0 0 2 1.6h9.5a2 2 0 0 0 1.9-1.4L23 6H6.2" />
+                </svg>
+                {count > 0 && <span className="hero-cart-badge">{count}</span>}
+              </button>
+            </div>
+          </nav>
+        </header>
+
+        {/* LAYER 3: Centerpiece Giant "YOGNA" Typography */}
+        <main className="relative z-10 my-auto flex flex-col items-center justify-center select-none py-6">
           <div
             id="yogna-hero-word"
             data-cursor="KINETIC"
@@ -538,7 +660,7 @@ export default function Hero() {
           </div>
         </main>
 
-        {/* LAYER 3: Bottom Metadata Bar */}
+        {/* LAYER 4: Bottom Metadata Bar */}
         <footer className="relative z-20 w-full max-w-[1360px] mx-auto pb-1 sm:pb-2 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div
             id="bottom-left-meta"
