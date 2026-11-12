@@ -15,7 +15,6 @@ const CHARS = [
 export default function Hero() {
   const { count, openCart } = useCart();
   const heroStageRef = useRef<HTMLElement>(null);
-  const trailCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     // Only run on client
@@ -203,34 +202,21 @@ export default function Hero() {
       });
     });
 
-    // 6. Velocity Spring Cursor + Ribbon Trail + 3D Mouse Tilt & Multi-Layer Parallax
+    // 6. Velocity Spring Cursor + 3D Mouse Tilt & Multi-Layer Parallax
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
     const cursorLabel = document.getElementById('cursor-label');
-    const trailCanvas = trailCanvasRef.current;
-    const ctx = trailCanvas?.getContext('2d');
 
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let ringX = mouseX;
     let ringY = mouseY;
-    const trailPoints: { x: number; y: number; age: number }[] = [];
     let isTicking = true;
     let animFrameId: number;
-
-    const resizeCanvas = () => {
-      if (trailCanvas) {
-        trailCanvas.width = window.innerWidth;
-        trailCanvas.height = window.innerHeight;
-      }
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
     const onGlobalMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      trailPoints.push({ x: mouseX, y: mouseY, age: 1.0 });
 
       // Multi-layer parallax
       const cx = window.innerWidth / 2;
@@ -346,28 +332,6 @@ export default function Hero() {
     const tickCursor = () => {
       if (!isTicking) return;
 
-      if (ctx && trailCanvas) {
-        ctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
-        if (trailPoints.length > 2) {
-          ctx.beginPath();
-          ctx.moveTo(trailPoints[0].x, trailPoints[0].y);
-          for (let i = 1; i < trailPoints.length - 1; i++) {
-            const xc = (trailPoints[i].x + trailPoints[i + 1].x) / 2;
-            const yc = (trailPoints[i].y + trailPoints[i + 1].y) / 2;
-            ctx.quadraticCurveTo(trailPoints[i].x, trailPoints[i].y, xc, yc);
-            trailPoints[i].age *= 0.91;
-          }
-          ctx.strokeStyle = 'rgba(217, 30, 24, 0.28)';
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-
-          while (trailPoints.length && trailPoints[0].age < 0.12) {
-            trailPoints.shift();
-          }
-        }
-      }
-
       ringX += (mouseX - ringX) * 0.16;
       ringY += (mouseY - ringY) * 0.16;
       const dx = mouseX - ringX;
@@ -455,7 +419,6 @@ export default function Hero() {
       document.body.classList.remove('custom-cursor-on');
       document.body.classList.remove('hero-energized');
 
-      window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', onGlobalMouseMove);
       window.removeEventListener('scroll', onScroll);
 
@@ -484,13 +447,7 @@ export default function Hero() {
 
   return (
     <>
-      {/* Interactive Cursor Ribbon Trail Canvas & Custom Dual Cursor */}
-      <canvas
-        ref={trailCanvasRef}
-        id="cursor-trail-canvas"
-        className="fixed inset-0 pointer-events-none z-30"
-        aria-hidden="true"
-      />
+      {/* Custom Dual Cursor */}
       <div id="cursor-dot" aria-hidden="true" />
       <div id="cursor-ring" aria-hidden="true">
         <span
