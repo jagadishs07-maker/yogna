@@ -1,13 +1,15 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Disable on touch / coarse pointer devices for native mobile performance
-    if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024) return;
+    // Disable on home page (Hero handles its own Lando Norris cursor) or on touch / coarse devices
+    if (pathname === '/' || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024) return;
 
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
@@ -63,6 +65,8 @@ export default function CustomCursor() {
       cancelAnimationFrame(animId);
     };
   }, []);
+
+  if (pathname === '/') return null;
 
   return (
     <div className="cursor">
