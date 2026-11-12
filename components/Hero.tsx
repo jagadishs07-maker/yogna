@@ -1,21 +1,31 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import ParticleHero from './ParticleHero';
+
+const LETTERS = ['Y', 'O', 'G', 'N', 'A'];
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Reveal bottom bar and divider line as loader finishes
-    const tl = gsap.timeline({ delay: 1.8 });
+    const tl = gsap.timeline({ delay: 2.2 });
 
-    tl.fromTo(
+    // Letter stagger
+    tl.to(lettersRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: 'power4.out',
+    })
+    .fromTo(
       bottomRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.3'
     )
     .fromTo(
       dividerRef.current,
@@ -27,8 +37,18 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="hero">
-      {/* Premium particle animated YOGNA typography with soft depth shadow */}
-      <ParticleHero />
+      {/* Giant YOGNA text */}
+      <div className="hero-bg-text" aria-label="YOGNA">
+        {LETTERS.map((letter, i) => (
+          <span
+            key={i}
+            ref={el => { lettersRef.current[i] = el; }}
+            className="hero-letter"
+          >
+            {letter}
+          </span>
+        ))}
+      </div>
 
       {/* Bottom bar */}
       <div ref={bottomRef} className="hero-bottom">

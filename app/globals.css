@@ -306,25 +306,6 @@ body.cursor-hover-cta .cursor-text {
   overflow: hidden;
 }
 
-.hero-particle-wrap {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.hero-particle-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
-
 .hero-bg-text {
   position: absolute;
   top: 50%;
@@ -945,18 +926,6 @@ body.cursor-hover-cta .cursor-text {
 /* ─── Utilities ──────────────────────────────────────────────── */
 .overflow-hidden { overflow: hidden; }
 .will-change-transform { will-change: transform; }
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
 
 /* ─── Additional Products Section ────────────────────────────── */
 .additional-section {
