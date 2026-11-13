@@ -9,7 +9,7 @@ export default function CustomCursor() {
 
   useEffect(() => {
     // Disable on home page (Hero handles its own Lando Norris cursor) or on touch / coarse devices
-    if (pathname === '/' || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024) return;
+    if (pathname === '/' || window.matchMedia('(pointer: coarse)').matches) return;
 
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
@@ -64,7 +64,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseover', onMouseOver);
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [pathname]);
 
   if (pathname === '/') return null;
 
